@@ -1,7 +1,9 @@
 {
-    "name": "sight-transit-api",
-    "main": "server.js",
-    "dependencies": {
-        "express": "~4.0.0"
-    }
+  "name": "sight-transit-api",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.0.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.81.0"
+  }
 }
