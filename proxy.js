@@ -13,3 +13,10 @@ proxy.getAgencies = function(callback) {
     });
 
 };
+
+proxy.getStopsByAgency = function(agencyId, callback) {
+    var call = request(baseUrl + 'stop-ids-for-agency/' + agencyId + '.json?key=' + key, function(error, response, body) {
+        // need to add error handling
+        callback(response);
+    });
+};

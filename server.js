@@ -14,8 +14,11 @@ router.get('/', function(req, res) {
 
 });
 
-router.route('/route').get(function(req, res) {
-    res.json({ message: 'data' });
+router.route('/stop/agency/:agency_id').get(function(req, res) {
+    var response = proxy.getStopsByAgency(req.params.agency_id, function(data) {
+        res.json({message: data});
+    });
+
 });
     
 
