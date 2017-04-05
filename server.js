@@ -2,6 +2,8 @@
 
 var express = require('express');
 var proxy = require('./proxy.js');
+var user = require('./user.js');
+
 var app = express();
 
 var router = express.Router();              // get an instance of the express Router
@@ -14,7 +16,7 @@ router.get('/', function(req, res) {
 
 });
 
-// get request that returns all stop_ids for an agency
+// for api/stop
 router.route('/stop/agency/:agency_id').get(function(req, res) {
     var response = proxy.getStopsByAgency(req.params.agency_id, function(data) {
         res.json({message: data});
@@ -44,11 +46,19 @@ router.route('/schedule/:stop_id/:trip_id/:service_date/:vehicle_id/:stop_sequen
     });
 });
 
-// more routes for our API will happen here
+// more routes for our API will happen here  
+router.route('/stop/uuid')
+    .get(function(req, res) {
+        res.json({message: "get uuid"});
+    })
+    .post(function(req, res) {
+        res.json({message: "post uuid"});
+    });
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
+app.use('/api/user', user);
 
 // START THE SERVER
 // =============================================================================
