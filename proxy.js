@@ -14,9 +14,24 @@ proxy.getAgencies = function(callback) {
 
 };
 
-proxy.getStopsByAgency = function(agencyId, callback) {
-    var call = request(baseUrl + 'stop-ids-for-agency/' + agencyId + '.json?key=' + key, function(error, response, body) {
+proxy.getStopsByAgency = function(agency_id, callback) {
+    var call = request(baseUrl + 'stop-ids-for-agency/' + agency_id + '.json?key=' + key, function(error, response, body) {
         // need to add error handling
+        callback(response);
+    });
+};
+
+proxy.getStopInfo = function(stop_id, callback) {
+    var call = request(baseUrl + 'stop/' + stop_id + '.json?key=' + key, function(error, response, body) {
+        callback(response);
+    });
+};
+
+proxy.getBusArrivalInfo = function(params, callback) {
+    var url = baseUrl + 'arrival-and-departure-for-stop/' + params.stop_id + '.json?key=' + key + '&tripId=' + params.trip_id + '&serviceDate=' 
+            + params.service_date + '&vehicleId=' + params.vehicle_id + '&stopSequence=' + params.stop_sequence;
+    console.log(url);
+    var call = request(url, function(error, response, body) {
         callback(response);
     });
 };

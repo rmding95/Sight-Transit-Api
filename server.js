@@ -14,15 +14,35 @@ router.get('/', function(req, res) {
 
 });
 
+// get request that returns all stop_ids for an agency
 router.route('/stop/agency/:agency_id').get(function(req, res) {
     var response = proxy.getStopsByAgency(req.params.agency_id, function(data) {
         res.json({message: data});
     });
 
 });
-    
 
+/*
+Get Stop Info
+/stop/:stop_id
+GET
+*/
+router.route('/stop/:stop_id').get(function(req, res) {
+    var response = proxy.getStopInfo(req.params.stop_id, function(data) {
+        res.json({message: data});
+    });
+});
 
+/*
+Bus Arrival At Stop
+/schedule/:stop_id/:trip_id/:service_date/:vehicle_id/:stop_sequence/:time
+GET
+*/
+router.route('/schedule/:stop_id/:trip_id/:service_date/:vehicle_id/:stop_sequence/:time').get(function(req, res) {
+    var response = proxy.getBusArrivalInfo(req.params, function(data) {
+        res.json({message: data});
+    });
+});
 
 // more routes for our API will happen here
 
